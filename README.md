@@ -1,37 +1,22 @@
-# ALPHA 0.1 trazability-hyperledger-fabric-network
+# TFG - Red de prueba Blockchain para trazabilidad basada en IoT
 
-### Test arquitecture for building a trazability network
+### Arquitecture for building a trazability network
 It consist in 2 orgs:
 
       OrdererOrg
       PeerOrg
 
-Each org joins the same channel, called "channel1"
+Each org joins the same channel, called "channel1".
+
+
+The `OrdererOrg` consist in 1 orderer that mantains the flow of the blockchain. He is responsible for managing and ordering all blocks.
+
+The `PeerOrg` consists in 3 `peers`. Each one has a local db state and writes information into the blockchain.
 
 
 
-### Application and chaincode idea
+This is the arqutecture proposed
 
-The chaincode will have basic functions:
-
-      InitLedger  ->    With the basic structure of the data          
-      CreateAsset ->    When we deploy new items/lugagge identites into the ledger
-      ReadAsset   ->    Reading the ID of the item/lugagge. Could read:
-
-                                                                  + Owner
-                                                                  + Destination
-                                                                  + Weight
-                                                                  + Time
-                                                                  
-      SendAsset   ->    To transfer information between peer nodes
-
-
-
-The *App* will read from the ledger and write into the ledger with those functions.
-Remaining processing data or information, it be handled by the *App* himself, the server
-where will be hosted.
-
-Then we will have:
 
                   |-------------------------------------------------------------------------------|
                   |                   Ledger0   <-   Peer0   <- ESP32_0 **collecting world data** | 
@@ -43,9 +28,9 @@ Then we will have:
 
 ## Instalation
 
-For installing and testing the net, It will only work with 1 peer (unless you chose to init the 2nd and 3rd peer) for testing the chaincode and 
-genesis config. It's still very early version.
+For installing and testing the net, you need to create the crypto material, setting up the core.yaml and orderer.yaml, creating a genesis block config and then join all memebers into the blockchain.
 
+I've made a script that automate the creation and joining process. You must redo the local configuration of your peers and orderer refering to your own network configuration.
 
 **Not automated yet! As version 1.0 Must be done manually. run_network.sh not working properly.**
 
@@ -66,24 +51,23 @@ The principal files are described here:
 
 - **cryptogen**: All the crypto material for users and Org1, OrdererOrg. 
 
-- **smartcontrac-dev**: The chaincode
+- **smartcontrac-dev**: The chaincode written in Javascript
 
-- **applicacion-nodejs**: Application and gateway for connecting and interacting with the smartcontract and the channel network.
+- **applicacion-nodejs**: Application and gateway for connecting and interacting with the smartcontract and the channel network. Writtern in Typescript.
 
 ## *SMARTCONTRACT-DEV*
 
-By the time, as in **ALPHA 0.1**, It only contains 3 functions:
+The `smartcontract` is the logic of the network. It will execute functions that are requiered for this project. Each of them manage the world state db, extracting information and adding it. These functions are linked to the `client user App`, a fronted for user to interact more visually with the blockchain.
 
-      InitLedger -->        Initialize the ledger with basic data, structured.
-      readAsset -->         Ask the ledger to retrieve the asset by an ID, if exist, returns it in a parsed JSON. If not, throws an error.
-      modifyAsset -->       Overrides the asset by an ID. If doesn't exist, throws an error.
-      createAsset -->       Creates a new instance in the ledger by giving the parameters of the asset:
-      
-                                          ID:
-                                          Color:
-                                          Size:
+These are the functions.
 
-
+      createUser              --> Registers users
+      addTrip                 --> Add information about the trip.
+      addBagToTrip            --> Creates information about the lugagge the user wants to travel with
+      addSizeAndPrice         --> Adds the price and Size to the db
+      addCheckpointToBag      --> Gets information from the ESP32 sensors and updates the DB. Also writes a timestamp when the data is written.
+      readAsset               --> Given an user ID, returns all data belongin to him. All flight history in this case.
+      deleteFlight            --> For develop purpouses. It doesnt have a frontend. Must be run in CLI. Detele a flight given user, flightId.
 
 
 
@@ -96,12 +80,20 @@ which It will decode all the QR images into text, It will create a file and will
 For the process of verifying QR codes, I need to generate a certain type of code with a certain ID which will be only
 valid for our propuose.
 
+## ESP32 scale/weight meter
+Using a HX711 sensor for measuring weight. The sensors are like a Weasthone bridge. It gives mV to to the ESP32, then with a calibration, we recieve these mV converted to grams.
+
+The ESP32 has an inside web server, that sends the weight to an HTTP endpoint. Then we recollect that data with a Python script and then we send it to our backend server (our Application) for processing it.
+
+Thanks to an Python script `webWeight.py` we get the weight, requesting the ESP32 to send the weight, and then we post the information into a local API.
+
 ## Application for interacting with chaincode.
-I made a simple WebApp to create new assets and read from the ledger. Calls simple API's to fetch directly from the peer0 (anchor peer and acting as main director of the PeerOrg). 
+The frontend application constist in a web interface for the user and the admin to see the data and write with the smartcontract functions into the ledger.
 
-You can ask by ID and it will return the ID, Color, and Weight.
+There, we can register, add our trip destinations, add the amount of bags we wish to travel with. Then it will gives us a simple QR for tracking your lugagge. 
 
-For creating an asset, you must SCAN with the ESP32 a QR with a valid form, then you need to introduce the color and the weight and it will be submited to the API then will call the createAssetMethod to invoke the createAsset function in the chaincode.
+We alse have a search function for retrieving all the user's history flight.
+
 
 ![webapp-nodejs-chaincode](https://github.com/syrshax/trazability-HLF/assets/92058771/87bd4d00-af2f-4842-8d0b-feec96ac2320)
 
