@@ -1,0 +1,24 @@
+./peer0/production
+./peer0/snapshots
+
+./peer1/production
+./peer1/snapshots
+
+./peer2/production
+./peer2/snapshots
+
+
+./orderer/etcdraftwal
+./orderer/ledger
+./orderer/snapdir
+
+#ignore text files in all project
+*.txt
+
+#ignore nodemodules, always use npm install for installing in other computers.
+./application-nodejs/node_modules
+./smartcontract-dev/node_modules
+
+
+# Ignore files related to API keys
+.env

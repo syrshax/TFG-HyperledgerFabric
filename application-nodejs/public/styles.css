@@ -1,0 +1,110 @@
+/* styles.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+}
+.left, .right, .center{
+    padding: 10px;
+    box-sizing: border-box;
+}
+.left {
+    flex: 1;
+    background-color: #f0f0f0;
+}
+.right {
+    flex: 1.5;
+    background-color: #e0e0e0;
+}
+.center{
+    background-color: #f0f0f0;
+    flex: 1;
+}
+h1{
+    padding: 5px;
+    border-bottom: 2px solid #0c0724;
+    background-color: #e0e0e0;
+}
+h2 {
+    padding: 5px;
+    margin-top: 5px;
+    border-bottom: 2px solid #0c0724;
+    border-radius: 3px;
+    width: 70%;
+}
+label, input, button {
+    display: block;
+    margin-bottom: 10px;
+}
+.search-bar {
+    margin-bottom: 5px;
+}
+#weightDisplay {
+    font-size: 24px;  /* Tamaño de letra */
+    color: blue;      /* Color azul */
+}
+
+
+.card {
+    border: 2px solid #0c0724;
+    border-style: double;
+    border-bottom-width: 3px;
+    border-right-width: 4px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #aea2c9;
+}
+
+.card-header {
+    font-size: 1.5em;
+    font-weight: bold;
+    border-bottom: 3px solid #0c0724;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.bag-list {
+    list-style-type: none;
+    padding: 5px;
+    margin: 10px;
+}
+
+.bag-item {
+    padding: 5px 0;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.bag-item:last-child {
+    border-bottom: none;
+}
+
+
+.buttonBag{
+    border: 3px solid #aea2c9;
+    border-radius: 10px;
+    padding: 5px;
+    width: 125px;
+
+}
+
+.buttonBag:hover{
+    background-color: #7544e9;
+}
+
+input[type=text] {
+	appearance: none;
+	border: none;
+	outline: none;
+	border-bottom: .2em solid #4a0a92;
+	background: rgba(#cf1515, .2);
+	border-radius: .2em .2em 0 0;
+	padding: .4em;
+	color: #070003;
+}
+
+
+

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Aplicación</title>
+    <link rel="stylesheet" href="styles.css">
+    <!--<script type="text/javascript" src="qrcode.js"></script>
+     <script type="text/javascript" src="jquery.min.js"></script>-->
+</head>
+<body>
+    <div class="container">
+            <div class="left">
+                <h2>TRACKING</h2>
+                <label for="userId">ID del Usuario:</label>
+                <input type="text" id="userId">
+                <button onclick="createUser()">Registrar nuevo usuario</button>
+            
+                <h3>Datos de viaje</h3>
+                <label for="travelUserId">ID del usuario:</label>
+                <input type="text" id="travelUserId">
+                <label for="origin">Origen:</label>
+                <input type="text" id="origin">
+                <label for="destination">Destino:</label>
+                <input type="text" id="destination">
+                <br>
+                <br>
+                <button class="buttonBag" onclick="addBag()">Nueva maleta</button>
+                <button class="buttonBag" onclick="deleteBag()">Eliminar maleta</button>
+                <div id="bagContainer"></div>
+                
+            
+                <br><br>
+                <button onclick="addCompleteTrip()">Añadir Viaje Completo</button>
+            </div>
+
+            <div class="center">
+                <h2>PESO DE FACTURACION</h2>
+                <p id="weightDisplay">Cargando peso...</p>
+
+                <label for="weightIdUser">ID USUARIO</label>
+                <input type="text" id="weightIdUser">
+                <label for="flightIdUser">IDENTIFICADOR VIAJE</label>
+                <input type="text" id="flightIdUser">
+                <label for="bagIdUser">IDENTIFICADOR MALETA</label>
+                <input type="text" id="bagIdUser">
+                <button class="buttonBag" onclick="sendWeight()">CONFIRMAR PESO Y PRECIO MALETA</button>
+                <br><br><br><br>
+                
+                <div id="qr-container">
+                <img id="qrImage" src="" alt="QR'S ASOCIADOS A TUS MALETAS">
+                </div>
+
+            </div>
+                
+            
+     
+
+        <div class="right">
+            <h2>Buscar Usuario</h2>
+            <div class="search-bar">
+                <label for="searchId">ID del Usuario:</label>
+                <input type="text" id="searchId">
+                <button onclick="searchUser()">Buscar</button>
+            </div>
+            <!-- Aquí puedes mostrar los resultados de la búsqueda o cualquier otra información -->
+        </div>
+
+
+
+
+    </div>
+    <script src="app.js"></script>
+
+
+
+</body>
+</html>

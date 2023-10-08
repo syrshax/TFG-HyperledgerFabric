@@ -1,0 +1,35 @@
+=============== Oct 7, 2023 (CEST) ===============
+18:43:19.670249 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+18:43:19.770506 db@open opening
+18:43:19.773238 version@stat F·[] S·0B[] Sc·[]
+18:43:19.820981 db@janitor F·2 G·0
+18:43:19.821021 db@open done T·50.485988ms
+=============== Oct 7, 2023 (CEST) ===============
+20:17:04.633824 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:17:04.633945 version@stat F·[] S·0B[] Sc·[]
+20:17:04.633971 db@open opening
+20:17:04.634011 journal@recovery F·1
+20:17:04.634257 journal@recovery recovering @1
+20:17:04.635163 version@stat F·[] S·0B[] Sc·[]
+20:17:04.801812 db@janitor F·2 G·0
+20:17:04.801858 db@open done T·167.877548ms
+=============== Oct 7, 2023 (CEST) ===============
+20:34:54.391675 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:34:54.391944 version@stat F·[] S·0B[] Sc·[]
+20:34:54.391983 db@open opening
+20:34:54.392085 journal@recovery F·1
+20:34:54.392750 journal@recovery recovering @2
+20:34:54.605600 memdb@flush created L0@4 N·16 S·317B "cha..nfo,v14":"cha..n\x01\x04,v15"
+20:34:54.606085 version@stat F·[1] S·317B[317B] Sc·[0.25]
+=============== Oct 7, 2023 (CEST) ===============
+20:34:58.958688 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:34:59.042483 remove CURRENT.6: remove ../orderer/ledger/index/CURRENT.6: no such file or directory
+20:34:59.042587 version@stat F·[1] S·317B[317B] Sc·[0.25]
+20:34:59.042614 db@open opening
+20:34:59.042693 journal@recovery F·1
+20:34:59.043175 journal@recovery recovering @5
+20:34:59.044254 version@stat F·[1] S·317B[317B] Sc·[0.25]
+20:34:59.160182 db@janitor F·5 G·2
+20:34:59.160217 db@janitor removing manifest-3
+20:34:59.160305 db@janitor removing journal-2
+20:34:59.160417 db@open done T·117.793375ms
